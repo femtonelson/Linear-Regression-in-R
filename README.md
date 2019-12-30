@@ -6,12 +6,15 @@
 
 
 # Exloratory Data Anaylysis
->> str(startup_data)
+> str(startup_data)
+----------------------------------------------------------------------
 'data.frame':	50 obs. of  5 variables:
  $ R.D.Spend      : num  165349 162598 153442 144372 142107 ...
  $ Administration : num  136898 151378 101146 118672 91392 ...
  $ Marketing.Spend: num  471784 443899 407935 383200 366168 ...
  $ State          : Factor w/ 3 levels "California","Florida",..: 3 1 2 3 2 3 1 2 3 1 ...
  $ Profit         : num  192262 191792 191050 182902 166188 ...
-> 
+----------------------------------------------------------------------
+>
+ 
  
