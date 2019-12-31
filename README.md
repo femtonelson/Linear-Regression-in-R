@@ -5,7 +5,7 @@
 
 # Objective : Attempt a prediction of a startup's profitability based on its spending and the State.
 
-# Exloratory Data Analysis
+# Exploratory Data Analysis
 ```
 #Importing the data
 >startup_data <- read.csv("50-startups.csv")
@@ -133,10 +133,14 @@ F-statistic: 450.8 on 2 and 47 DF,  p-value: < 2.2e-16
 #2-The global Fisher test shows low (good) p-value <2.2e-16 => Good model.
 #2-The p-value associated with Marketing.Spend is 6%. This variable can be rejected or accepted depending on the acceptable p-value threshold.
 #3-If the threshold is 7%, the p-value = 6% is judged acceptable and the conclusion is : Profit depends on both R.D.Spend and Marketing.Spend.
+#4-Furthermore removing Marketing.Spend variable gives a smaller Adjusted R-squared value of 0.9454 (as compared to 0.9483)  i.e >my_model = lm(Profit~R.D.Spend, data=startup_numeric)
 ```
 # Verifying Assumptions on Residuals/Noise
-
-<img src="./Plot.jpg">
+```
+>par(mfrow=c(2,2))
+>plot(my_model)
+```
+<img src="./Plot.png">
 
 
 # Pedicting Profitability (Out-of-sample)
