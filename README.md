@@ -81,10 +81,66 @@ F-statistic: 169.9 on 5 and 44 DF,  p-value: < 2.2e-16
 # Variable Selection
 ```
 #State has no influence on Profit -> Removed from model
+#Considering only numerical explanatory variables in the model
+>my_model = lm(Profit~., data=startup_numeric)
+>summary(my_model)
+Call:
+lm(formula = Profit ~ ., data = startup_numeric)
 
+Residuals:
+   Min     1Q Median     3Q    Max 
+-33534  -4795     63   6606  17275 
 
+Coefficients:
+                  Estimate Std. Error t value Pr(>|t|)    
+(Intercept)      5.012e+04  6.572e+03   7.626 1.06e-09 ***
+R.D.Spend        8.057e-01  4.515e-02  17.846  < 2e-16 ***
+Administration  -2.682e-02  5.103e-02  -0.526    0.602    
+Marketing.Spend  2.723e-02  1.645e-02   1.655    0.105    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 9232 on 46 degrees of freedom
+Multiple R-squared:  0.9507,	Adjusted R-squared:  0.9475 
+F-statistic:   296 on 3 and 46 DF,  p-value: < 2.2e-16
+
+#1-Proceeding with a backward variable selection procedure, the variable Administration is excluded (highest p-value) => It has no influence on Profit.
+#1-The value of the Adjusted R-squared is 0.9475.
+
+#Considering only Marketing.Spend & R.D.Spend in the model
+>my_model = lm(Profit~R.D.Spend+Marketing.Spend, data=startup_numeric)
+>summary(my_model)
+Call:
+lm(formula = Profit ~ R.D.Spend + Marketing.Spend, data = startup_numeric)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-33645  -4632   -414   6484  17097 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)    
+(Intercept)     4.698e+04  2.690e+03  17.464   <2e-16 ***
+R.D.Spend       7.966e-01  4.135e-02  19.266   <2e-16 ***
+Marketing.Spend 2.991e-02  1.552e-02   1.927     0.06 .  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 9161 on 47 degrees of freedom
+Multiple R-squared:  0.9505,	Adjusted R-squared:  0.9483 
+F-statistic: 450.8 on 2 and 47 DF,  p-value: < 2.2e-16
+
+#1-The value of the Adjusted R-squared improves to 0.9483.
+#2-The global Fisher test shows low (good) p-value <2.2e-16 => Good model.
+#2-The p-value associated with Marketing.Spend is 6%. This variable can be rejected or accepted depending on the acceptable p-value threshold.
+#3-If the threshold is 7%, the p-value = 6% is judged acceptable and the conclusion is : Profit depends on both R.D.Spend and Marketing.Spend.
 ```
-# Pedicting Test Set Results
+# Verifying Assumptions on Residuals/Noise
+
+<img src="./Plot.jpg">
+
+
+# Pedicting Profitability (Out-of-sample)
+
 
 # Conclusion
  
