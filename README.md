@@ -18,11 +18,72 @@
  $ Marketing.Spend: num  471784 443899 407935 383200 366168 ...
  $ State          : Factor w/ 3 levels "California","Florida",..: 3 1 2 3 2 3 1 2 3 1 ...
  $ Profit         : num  192262 191792 191050 182902 166188 ...
+
+#Given the relative small size of the dataset, cross-validation will not be performed.
+
+#Evaluation of correlation matrix between numerical variables
+> startup_subset <- startup_data %>% select(R.D.Spend, Administration, Marketing.Spend, Profit)
+
+> cor(startup_subset)
+                R.D.Spend Administration Marketing.Spend    Profit
+R.D.Spend       1.0000000     0.24195525      0.72424813 0.9729005
+Administration  0.2419552     1.00000000     -0.03215388 0.2007166
+Marketing.Spend 0.7242481    -0.03215388      1.00000000 0.7477657
+Profit          0.9729005     0.20071657      0.74776572 1.0000000
+
+#The above matrix suggests Profit is strongly and positively correlated with Marketing and R&D spending.
+#Administration spending however shows low correlation with other variables and as such is not likely to affect Profit. To be confirmed.
+
+#Analysis of variance between Profit(quantitative) and State(qualitative) (Single factor)
+>startup_factor <- startup_data %>% select(State, Profit)
+>test_aov <- aov(Profit~State, data=startup_factor)
+>summary(test_aov)
+            Df    Sum Sq   Mean Sq F value Pr(>F)
+State        2 1.901e+09 9.503e+08   0.575  0.567 
+Residuals   47 7.770e+10 1.653e+09 
+
+#The p-value (=0.567) of aov test reveals "If there is no influence of State on Profit, this is likely to happen 56.7% of the time.
 ```
->
+# Model Fitting
+```
+#Model fitting with all explanatory variables
+>my_model = lm(Profit~., data=startup_data)
+>summary(my_model)
+Call:
+lm(formula = Profit ~ ., data = startup_data)
 
-# Model Fitting on Training Set
+Residuals:
+   Min     1Q Median     3Q    Max 
+-33504  -4736     90   6672  17338 
 
+Coefficients:
+                  Estimate Std. Error t value Pr(>|t|)    
+(Intercept)      5.013e+04  6.885e+03   7.281 4.44e-09 ***
+R.D.Spend        8.060e-01  4.641e-02  17.369  < 2e-16 ***
+Administration  -2.700e-02  5.223e-02  -0.517    0.608    
+Marketing.Spend  2.698e-02  1.714e-02   1.574    0.123    
+StateFlorida     1.988e+02  3.371e+03   0.059    0.953    
+StateNew York   -4.189e+01  3.256e+03  -0.013    0.990    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 9439 on 44 degrees of freedom
+Multiple R-squared:  0.9508,	Adjusted R-squared:  0.9452 
+F-statistic: 169.9 on 5 and 44 DF,  p-value: < 2.2e-16
+
+#The above summary shows :
+#1-Considering a multiple linear model is a good idea since the Adjusted R-squared and Multiple R-squared are close to 1.
+#2-The p-values associated with factors StateFlorida & StateNew York are high >95% (the reference for the T test is California). This is in accordance with the AOV test performed earlier.
+#2-Therefore we accept the null hypothesis : There is no difference between the influence of Florida compared to California,the influence of New York compared to California & furthermore no influence of the State in which the Startup is located on its profitability.
+#3-The low p-value (<2e-16) of the T test on R.D.Spend suggests this variable has an influence on the Profit (null hypothesis rejected).
+#4-Administration and Marketing.Spend have high p-values (12% & 60%) which suggest these variables have no influence on Profit. To be confirmed in variable selection procedure.
+```
+# Variable Selection
+```
+#State has no influence on Profit -> Removed from model
+
+
+```
 # Pedicting Test Set Results
 
 # Conclusion
