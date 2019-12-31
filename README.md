@@ -151,7 +151,7 @@ F-statistic: 450.8 on 2 and 47 DF,  p-value: < 2.2e-16
 <img src="./Plot.png">
 
 
-# Pedicting Profit with the model
+# Predicting Profit with the model
 ```
 >newdata <- data.frame(R.D.Spend=300000, Marketing.Spend=200000)  #300000 spent on R&D and 200000 spent on Marketing
 >result1 <- predict(my_model, newdata, interval="prediction",level=0.95)  #"prediction" for the prediction interval
