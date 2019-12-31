@@ -137,8 +137,16 @@ F-statistic: 450.8 on 2 and 47 DF,  p-value: < 2.2e-16
 ```
 # Verifying Assumptions on Residuals/Noise
 ```
->par(mfrow=c(2,2))
+>par(mfrow=c(2,2)) #2x2 image layout
 >plot(my_model)
+
+#The multi-linear regression model relies on some fundamental assumptions made on noise. These assumptions must be verified for the model to be valid.
+#1- Independence of noise : This depends on how the samples were collected. For instance the startups should have been selected randomly in each state and a startup's data shouldn't be collected more than once.
+#2- Normality/Gaussianity of noise : The Q-Q (Quantile-Quantile) plot below, which shows the standardized residuals' quantile plot vs the standard Normal dist. quantiles, reveals the noise can be considered as Gaussian.
+#2- The plotted points closely match the theoretical straight line.
+#3- Homoscedasticity : This assumption is verified as the residuals are equally spreaded along the range of fitted/predicted values of Profit. In other words, the variance of the residuals is constant.
+#4- The residuals vs Leverage plot shows all points lie well within the Cook's distance lines, so there are no influential outliers and the model is good.
+#5- In the Residuals vs Fitted plot, residuals are equally spread around the horizontal line without a distinct pattern. This suggests the model is good as there is no non-linear relationship hidden in the residuals. 
 ```
 <img src="./Plot.png">
 
