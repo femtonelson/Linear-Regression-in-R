@@ -15,6 +15,17 @@ startup_factor <- startup_data %>% select(State, Profit)
 test_aov <- aov(Profit~State, data=startup_factor)
 summary(test_aov)
 
-#Model fitting
-my_model = lm(Profit~R.D.Spend, Administration, Marketing.Spend, data=startup_data)
+#Model fitting with all explanatory variables
+my_model = lm(Profit~., data=startup_data)
 summary(my_model)
+
+#Variable selection - Considering only numerical explanatory variables in the model
+my_model = lm(Profit~., data=startup_numeric)
+summary(my_model)
+
+#Considering only Administration & R.D.Spend in the model
+my_model = lm(Profit~R.D.Spend+Marketing.Spend, data=startup_numeric)
+summary(my_model)
+
+# Pedicting Profitability (Out-of-sample)
+
