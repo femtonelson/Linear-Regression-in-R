@@ -151,9 +151,33 @@ F-statistic: 450.8 on 2 and 47 DF,  p-value: < 2.2e-16
 <img src="./Plot.png">
 
 
-# Pedicting Profitability (Out-of-sample)
+# Pedicting Profit with the model
+```
+>newdata <- data.frame(R.D.Spend=300000, Marketing.Spend=200000)  #300000 spent on R&D and 200000 spent on Marketing
+>result1 <- predict(my_model, newdata, interval="prediction",level=0.95)  #"prediction" for the prediction interval
+> result1
+       fit      lwr      upr
+1 291932.7 265282.9 318582.4
+# According to the model, 95% of startups that spend 300000 on R&D and 200000 on Marketing, irrespective of their Administration spending and location (NY, Florida or California)
+# earn a profit between 265282.9 and 318582.4.
 
+>result2 <- predict(my_model, newdata, interval="confidence",level=0.95) #"confidence" for the confidence interval
+> result2
+       fit      lwr      upr
+1 291932.7 272682.6 311182.7
+# According to the model, 95% of startups that spend 300000 on R&D and 200000 on Marketing, irrespective of their Administration spending and location (NY, Florida or California)
+# earn, ON AVERAGE, a profit between 272682.6 and 311182.7.
+```
 
 # Conclusion
- 
+*A linear model could be obtained with Profit depending on R&D and Marketing spending
+*
+*The linear model coefficient for R&D (0.796) compared with that of Marketing (0.029) suggests that investing on R&D is more profitable than investing on Marketing.
+
+
+
+
+
+
+********************
  
