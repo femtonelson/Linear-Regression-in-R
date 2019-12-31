@@ -170,9 +170,9 @@ F-statistic: 450.8 on 2 and 47 DF,  p-value: < 2.2e-16
 ```
 
 # Conclusion
-*A linear model could be obtained with Profit depending on R&D and Marketing spending
-*
-*The linear model coefficient for R&D (0.796) compared with that of Marketing (0.029) suggests that investing on R&D is more profitable than investing on Marketing.
+A linear model could be obtained with Profit depending on R&D and Marketing spending.
+The linear model coefficient for R&D (0.796) compared with that of Marketing (0.029) suggests that investing on R&D is more profitable than investing on Marketing.
+Administration spending and location do not influence the startups' profit.
 
 
 
