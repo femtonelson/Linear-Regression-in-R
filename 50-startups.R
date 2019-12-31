@@ -27,8 +27,8 @@ summary(my_model)
 my_model = lm(Profit~R.D.Spend+Marketing.Spend, data=startup_numeric)
 summary(my_model)
 
->par(mfrow=c(2,2))
->plot(my_model)
+par(mfrow=c(2,2))
+plot(my_model)
 
 # Pedicting Profitability (Out-of-sample)
 newdata = 
