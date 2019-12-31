@@ -23,9 +23,12 @@ summary(my_model)
 my_model = lm(Profit~., data=startup_numeric)
 summary(my_model)
 
-#Considering only Administration & R.D.Spend in the model
+#Considering only Marketing.Spend & R.D.Spend in the model
 my_model = lm(Profit~R.D.Spend+Marketing.Spend, data=startup_numeric)
 summary(my_model)
 
-# Pedicting Profitability (Out-of-sample)
+>par(mfrow=c(2,2))
+>plot(my_model)
 
+# Pedicting Profitability (Out-of-sample)
+newdata = 
