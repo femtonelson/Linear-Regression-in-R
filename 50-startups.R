@@ -30,5 +30,7 @@ summary(my_model)
 par(mfrow=c(2,2))
 plot(my_model)
 
-# Pedicting Profitability (Out-of-sample)
-newdata = 
+# Pedicting Profitability
+newdata <- data.frame(R.D.Spend=300000, Marketing.Spend=200000)
+result1 <- predict(my_model, newdata, interval="prediction",level=0.95)
+result2 <- predict(my_model, newdata, interval="confidence",level=0.95)
